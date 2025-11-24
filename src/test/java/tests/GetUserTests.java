@@ -15,7 +15,7 @@ public class GetUserTests extends TestBase {
     @DisplayName("Проверка получения списка пользователей по номеру страницы")
     void getListUsersTestPositive() {
         given()
-                //.queryParam("page", 1)
+                .queryParam("page", 1)
                 .when()
                 .get("/users")
                 .then()
@@ -49,7 +49,7 @@ public class GetUserTests extends TestBase {
     @DisplayName("Проверка корректной ошибки в ответе, если пользователь не найден")
     void getNotFoundUserTest() {
         given()
-                .queryParam("id",55)
+                .queryParam("id", 55)
                 .log().uri()
                 .when()
                 .get("/users")
