@@ -1,5 +1,6 @@
 package tests;
 
+import endpoints.UserEndpoints;
 import io.qameta.allure.Description;
 import io.restassured.http.ContentType;
 import org.hamcrest.Matchers;
@@ -11,9 +12,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.is;
 
-
 public class PostUserTests extends TestBase {
-
 
     @Test
     @Description("Отправка POST запроса и создание пользователя")
@@ -24,7 +23,7 @@ public class PostUserTests extends TestBase {
                 .contentType(ContentType.JSON)
                 .body(Constants.validCreateData)
                 .when()
-                .post("/users")
+                .post(UserEndpoints.CREATE_USER.getEndpoint())
                 .then()
                 .log().all()
                 .statusCode(201)
@@ -34,14 +33,14 @@ public class PostUserTests extends TestBase {
 
     @Test
     @Description("Отправка POST запроса и регистрация нового пользователя")
-    @DisplayName("Проверка регистрации нового пользователя")
+    @DisplayName("Проверка успешной регистрации нового пользователя")
     void registerNewUserSuccess() {
         given()
                 .log().all()
                 .contentType(ContentType.JSON)
                 .body(Constants.validRegisterData)
                 .when()
-                .post("/register")
+                .post(UserEndpoints.REGISTER_USER.getEndpoint())
                 .then()
                 .log().all()
                 .statusCode(200)
@@ -53,14 +52,14 @@ public class PostUserTests extends TestBase {
 
     @Test
     @Description("Отправка POST запроса и регистрация нового пользователя")
-    @DisplayName("Проверка регистрации нового пользователя")
+    @DisplayName("Проверка ошибки при попытке зарегистрировать пользователя без пароля")
     void registerNewUserNegative() {
         given()
                 .log().all()
                 .contentType(ContentType.JSON)
                 .body(Constants.inValidRegisterData)
                 .when()
-                .post("/register")
+                .post(UserEndpoints.REGISTER_USER.getEndpoint())
                 .then()
                 .log().status()
                 .log().body()

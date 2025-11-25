@@ -1,5 +1,6 @@
 package tests;
 
+import endpoints.UserEndpoints;
 import jdk.jfr.Description;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,13 +18,12 @@ public class GetUserTests extends TestBase {
         given()
                 .queryParam("page", 1)
                 .when()
-                .get("/users")
+                .get(UserEndpoints.LIST_USERS.getEndpoint())
                 .then()
                 .log().all()
                 .statusCode(200)
                 .body("page", equalTo(1))
                 .body("data.id", hasItem(6));
-
     }
 
     @Test
@@ -31,9 +31,9 @@ public class GetUserTests extends TestBase {
     @DisplayName("Получение конкретного пользователя по id")
     void getUserByIdTest() {
         given()
-                .queryParam("id", 4)
+                .pathParam("id", 4)
                 .when()
-                .get("/users")
+                .get(UserEndpoints.SINGLE_USER.getEndpoint())
                 .then()
                 .log().all()
                 .statusCode(200)
@@ -41,7 +41,6 @@ public class GetUserTests extends TestBase {
                 .body("data.email", equalTo("eve.holt@reqres.in"))
                 .body("data.first_name", equalTo("Eve"))
                 .body("data.last_name", equalTo("Holt"));
-
     }
 
     @Test
@@ -49,10 +48,10 @@ public class GetUserTests extends TestBase {
     @DisplayName("Проверка корректной ошибки в ответе, если пользователь не найден")
     void getNotFoundUserTest() {
         given()
-                .queryParam("id", 55)
+                .pathParam("id", 55)
                 .log().uri()
                 .when()
-                .get("/users")
+                .get(UserEndpoints.SINGLE_USER.getEndpoint())
                 .then()
                 .log().status()
                 .log().body()
