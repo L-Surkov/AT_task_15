@@ -47,3 +47,9 @@ tasks.withType(Test) {
         }
     }
 }
+
+tasks.register('executeApiTests', Test) {
+    useJUnitPlatform {
+        includeTags("ApiTests")
+    }
+}

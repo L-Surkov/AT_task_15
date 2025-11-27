@@ -8,6 +8,7 @@ import models.User;
 import models.UserListResponse;
 import models.UserSingleResponse;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import specs.CustomSpec;
 import testData.TestData;
@@ -23,6 +24,7 @@ public class GetUserTests extends TestBase {
     @Test
     @Description("Отправка GET запроса и вывод списка пользователей")
     @DisplayName("Проверка получения списка пользователей по номеру страницы")
+    @Tag("ApiTests")
     @Step("Запрос списка пользователей по странице")
     void getListUsersTestPositive() {
         UserListResponse response = given(CustomSpec.requestSpec)
@@ -47,6 +49,7 @@ public class GetUserTests extends TestBase {
     @Test
     @Description("Отправка GET запроса и вывод конкретного пользователя")
     @DisplayName("Получение конкретного пользователя по id")
+    @Tag("ApiTests")
     @Step("Запрос пользователя по id")
     void getUserByIdTest() {
         UserSingleResponse response = given(CustomSpec.requestSpec)
@@ -72,6 +75,7 @@ public class GetUserTests extends TestBase {
     @Test
     @Description("Отправка GET запроса с id несуществующего пользователя")
     @DisplayName("Проверка корректной ошибки в ответе, если пользователь не найден")
+    @Tag("ApiTests")
     @Step("Запрос пользователя по несуществующему id")
     void getNotFoundUserTest() {
         ErrorResponse response = given(CustomSpec.requestSpec)

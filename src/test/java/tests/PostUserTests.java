@@ -5,6 +5,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import models.*;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import specs.CustomSpec;
 import testData.TestData;
@@ -18,6 +19,7 @@ public class PostUserTests extends TestBase {
     @Test
     @Description("Отправка POST запроса и создание пользователя")
     @DisplayName("Проверка успешного создания нового пользователя")
+    @Tag("ApiTests")
     @Step("Отправка запроса на создание нового пользователя")
     void createUserTestPositive() {
 
@@ -43,6 +45,7 @@ public class PostUserTests extends TestBase {
     @Test
     @Description("Отправка POST запроса и регистрация нового пользователя")
     @DisplayName("Проверка успешной регистрации нового пользователя")
+    @Tag("ApiTests")
     @Step("Отправка запроса на регистрацию нового пользователя")
     void registerNewUserSuccess() {
 
@@ -68,6 +71,7 @@ public class PostUserTests extends TestBase {
     @Test
     @Description("Отправка POST запроса и регистрация нового пользователя")
     @DisplayName("Проверка ошибки при попытке зарегистрировать пользователя без пароля")
+    @Tag("ApiTests")
     @Step("Отправка запроса на регистрацию нового пользователя без пароля")
     void registerNewUserNegative() {
 
