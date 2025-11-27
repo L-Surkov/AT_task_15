@@ -6,8 +6,8 @@ public class CustomAllureListener {
     private static final AllureRestAssured FILTER = new AllureRestAssured();
 
     public static AllureRestAssured withCustomTemplates() {
-        FILTER.setRequestTemplate("request.ftl");
-        FILTER.setResponseTemplate("response.ftl");
+        FILTER.setRequestTemplate("src/test/java/resources/tpl/request.ftl");
+        FILTER.setResponseTemplate("src/test/java/resources/tpl/response.ftl");
         return FILTER;
     }
 }
